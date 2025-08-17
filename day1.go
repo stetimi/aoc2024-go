@@ -1,7 +1,7 @@
 package main
 
 import (
-	"aoc2024-go/internal/utils"
+	"aoc2024-go/utils"
 	"os"
 	"sort"
 	"strconv"
