@@ -1,6 +1,7 @@
 package main
 
 import (
+	"aoc2024-go/internal/utils"
 	"os"
 	"sort"
 	"strconv"
@@ -20,7 +21,7 @@ func main() {
 	part1 := sumDiffs(left, right)
 	println("Part 1: ", part1)
 
-	rightFrequencies := frequencyMap(right)
+	rightFrequencies := utils.FrequencyMap(right)
 	part2 := calculateSimilarityScore(left, rightFrequencies)
 	println("Part 2: ", part2)
 }
@@ -51,20 +52,12 @@ func abs(a int) int {
 	return a
 }
 
-func frequencyMap(values []int) map[int]int {
-	freqMap := make(map[int]int)
-	for _, value := range values {
-		freqMap[value]++
-	}
-	return freqMap
-}
+// ...existing code...
 
 func calculateSimilarityScore(values []int, frequencies map[int]int) int {
 	score := 0
 	for _, value := range values {
-		if freq, exists := frequencies[value]; exists {
-			score += value * freq
-		}
+		score += value * frequencies[value]
 	}
 	return score
 }
