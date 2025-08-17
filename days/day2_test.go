@@ -1,4 +1,4 @@
-package aco2024
+package days
 
 import "testing"
 
@@ -7,7 +7,7 @@ func TestIsSafeIncreasing(t *testing.T) {
 }
 
 func TestIsSafeDecreasing(t *testing.T) {
-	runIsSafeTest(t, "Decreasing", []int{6, 4, 2, 1}, true)
+	runIsSafeTest(t, "Decreasing", []int{9, 7, 6, 3, 1}, true)
 }
 
 func TestIsSafeNotStrictlyMonotonic(t *testing.T) {
@@ -15,7 +15,7 @@ func TestIsSafeNotStrictlyMonotonic(t *testing.T) {
 }
 
 func TestIsSafeLargeDiff(t *testing.T) {
-	runIsSafeTest(t, "LargeDiff", []int{1, 3, 6}, false)
+	runIsSafeTest(t, "LargeDiff", []int{1, 3, 7}, false)
 }
 
 func TestIsSafeZigzag(t *testing.T) {

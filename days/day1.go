@@ -1,4 +1,4 @@
-package aoc2024
+package days
 
 import (
 	"aoc2024-go/utils"
