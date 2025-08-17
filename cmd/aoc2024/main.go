@@ -13,14 +13,19 @@ func main() {
 		panic(err)
 	}
 	lines := strings.Split(string(day1), "\n")
-	left, right := SplitIntoTwoColumns(lines, "   ")
+
+	left, right := splitIntoTwoColumns(lines, "   ")
 	sort.Ints(left)
 	sort.Ints(right)
-	diffs := SumDiffs(left, right)
-	println("Result: ", diffs)
+	part1 := sumDiffs(left, right)
+	println("Part 1: ", part1)
+
+	rightFrequencies := frequencyMap(right)
+	part2 := calculateSimilarityScore(left, rightFrequencies)
+	println("Part 2: ", part2)
 }
 
-func SplitIntoTwoColumns(lines []string, sep string) ([]int, []int) {
+func splitIntoTwoColumns(lines []string, sep string) ([]int, []int) {
 	left := make([]int, len(lines))
 	right := make([]int, len(lines))
 	for i, line := range lines {
@@ -31,17 +36,35 @@ func SplitIntoTwoColumns(lines []string, sep string) ([]int, []int) {
 	return left, right
 }
 
-func SumDiffs(left, right []int) int {
+func sumDiffs(left, right []int) int {
 	sum := 0
 	for i := range left {
-		sum += Abs(left[i] - right[i])
+		sum += abs(left[i] - right[i])
 	}
 	return sum
 }
 
-func Abs(a int) int {
+func abs(a int) int {
 	if a < 0 {
 		return -a
 	}
 	return a
+}
+
+func frequencyMap(values []int) map[int]int {
+	freqMap := make(map[int]int)
+	for _, value := range values {
+		freqMap[value]++
+	}
+	return freqMap
+}
+
+func calculateSimilarityScore(values []int, frequencies map[int]int) int {
+	score := 0
+	for _, value := range values {
+		if freq, exists := frequencies[value]; exists {
+			score += value * freq
+		}
+	}
+	return score
 }
