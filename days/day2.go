@@ -7,15 +7,29 @@ import (
 )
 
 func Day2() {
-	reports := utils.ReadFileToLines("resources/day2.txt")
-	safe_reports := 0
-	for _, report_text := range reports {
-		report := splitToInts(report_text)
-		if isSafe(report) {
-			safe_reports++
+	contents := utils.ReadFileToLines("resources/day2.txt")
+	reports := make([][]int, len(contents))
+	for i, report_text := range contents {
+		reports[i] = splitToInts(report_text)
+	}
+
+	safe_reports_day1 := 0
+	safe_reports_day2 := 0
+	for _, report := range reports {
+		if isSafe(report, -1) {
+			safe_reports_day1++
+			safe_reports_day2++
+			continue
+		}
+		for ignore_index := 0; ignore_index < len(report); ignore_index++ {
+			if isSafe(report, ignore_index) {
+				safe_reports_day2++
+				break
+			}
 		}
 	}
-	println("Part 1: ", safe_reports)
+	println("Part 1: ", safe_reports_day1)
+	println("Part 2: ", safe_reports_day2)
 }
 
 func splitToInts(report string) []int {
@@ -31,16 +45,36 @@ func splitToInts(report string) []int {
 	return levels
 }
 
-func isSafe(report []int) bool {
-	requiredSign := utils.Sign(report[1] - report[0])
-	if requiredSign == 0 {
+func isSafe(report []int, ignore_index int) bool {
+	working_report := report
+	if ignore_index != -1 {
+		working_report = ignoreIndex(report, ignore_index)
+	}
+	direction := utils.Sign(working_report[1] - working_report[0])
+	if direction == 0 {
 		return false
 	}
-	for i := 0; i < len(report)-1; i++ {
-		diff := report[i+1] - report[i]
-		if utils.Sign(diff) != requiredSign || utils.Abs(diff) > 3 {
+	for i := 0; i < len(working_report)-1; i++ {
+		diff := working_report[i+1] - working_report[i]
+		if utils.Sign(diff) != direction {
+			return false
+		}
+		abs_diff := utils.Abs(diff)
+		if abs_diff > 3 {
 			return false
 		}
 	}
 	return true
+}
+
+func ignoreIndex(report []int, ignoredIndex int) []int {
+	copy := make([]int, len(report)-1)
+	ci := 0
+	for ri := 0; ri < len(report); ri++ {
+		if ri != ignoredIndex {
+			copy[ci] = report[ri]
+			ci++
+		}
+	}
+	return copy
 }
