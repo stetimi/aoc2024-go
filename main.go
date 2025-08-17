@@ -12,18 +12,15 @@ func main() {
 		fmt.Println("Usage: go run main.go <day_number>")
 		os.Exit(1)
 	}
+	dayFuncs := []func(){
+		days.Day1,
+		days.Day2,
+		days.Day3,
+	}
 	day, err := strconv.Atoi(os.Args[1])
-	if err != nil {
-		fmt.Println("Invalid day number. Please provide an integer.")
+	if err != nil || day < 1 || day > len(dayFuncs) {
+		fmt.Printf("Invalid day number. Please provide an integer between 1 and %d\n", len(dayFuncs))
 		os.Exit(1)
 	}
-	switch day {
-	case 1:
-		days.Day1()
-	case 2:
-		days.Day2()
-	default:
-		fmt.Printf("Day %d not implemented.\n", day)
-		os.Exit(1)
-	}
+	dayFuncs[day-1]()
 }
