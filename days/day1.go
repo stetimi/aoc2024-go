@@ -25,7 +25,7 @@ func splitIntoTwoColumns(lines []string, sep string) ([]int, []int) {
 	left := make([]int, len(lines))
 	right := make([]int, len(lines))
 	for i, line := range lines {
-		cols := strings.SplitN(line, "   ", 2)
+		cols := strings.SplitN(line, sep, 2)
 		left[i], _ = strconv.Atoi(cols[0])
 		right[i], _ = strconv.Atoi(cols[1])
 	}

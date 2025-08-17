@@ -3,6 +3,8 @@ package days
 import (
 	"fmt"
 	"testing"
+
+	"github.com/stretchr/testify/assert"
 )
 
 func TestIsSafeIncreasing(t *testing.T) {
@@ -38,7 +40,5 @@ func TestIsNotSafeIgnoringAnyValue(t *testing.T) {
 func runIsSafeTest(t *testing.T, name string, input []int, ignore_index int, wanted bool) {
 	t.Helper()
 	result := isSafe(input, ignore_index)
-	if result != wanted {
-		t.Errorf("%s: isSafe(%v) = %v, wanted %v", name, input, result, wanted)
-	}
+	assert.Equal(t, wanted, result, "%s: isSafe(%v) = %v, wanted %v", name, input, result, wanted)
 }
