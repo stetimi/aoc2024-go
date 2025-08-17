@@ -2,18 +2,13 @@ package main
 
 import (
 	"aoc2024-go/utils"
-	"os"
 	"sort"
 	"strconv"
 	"strings"
 )
 
 func main() {
-	day1, err := os.ReadFile("resources/day1.txt")
-	if err != nil {
-		panic(err)
-	}
-	lines := strings.Split(string(day1), "\n")
+	lines := utils.ReadFileToLines("resources/day1.txt")
 
 	left, right := splitIntoTwoColumns(lines, "   ")
 	sort.Ints(left)
@@ -40,19 +35,10 @@ func splitIntoTwoColumns(lines []string, sep string) ([]int, []int) {
 func sumDiffs(left, right []int) int {
 	sum := 0
 	for i := range left {
-		sum += abs(left[i] - right[i])
+		sum += utils.Abs(left[i] - right[i])
 	}
 	return sum
 }
-
-func abs(a int) int {
-	if a < 0 {
-		return -a
-	}
-	return a
-}
-
-// ...existing code...
 
 func calculateSimilarityScore(values []int, frequencies map[int]int) int {
 	score := 0
