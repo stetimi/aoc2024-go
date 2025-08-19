@@ -14,6 +14,7 @@ func main() {
 		days.Day1,
 		days.Day2,
 		days.Day3,
+		days.Day4,
 	}
 	if len(os.Args) == 1 {
 		fmt.Println("No arguments provided. Running all days...")
