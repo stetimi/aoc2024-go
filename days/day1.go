@@ -7,18 +7,15 @@ import (
 	"strings"
 )
 
-func Day1() {
+func Day1() utils.Answers {
 	lines := utils.ReadFileToLines("resources/day1.txt")
-
 	left, right := splitIntoTwoColumns(lines, "   ")
 	sort.Ints(left)
 	sort.Ints(right)
 	part1 := sumDiffs(left, right)
-	println("Part 1: ", part1)
-
 	rightFrequencies := utils.FrequencyMap(right)
 	part2 := calculateSimilarityScore(left, rightFrequencies)
-	println("Part 2: ", part2)
+	return utils.IntAnswers(part1, part2)
 }
 
 func splitIntoTwoColumns(lines []string, sep string) ([]int, []int) {

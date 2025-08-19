@@ -2,6 +2,7 @@ package main
 
 import (
 	"aoc2024-go/days"
+	"aoc2024-go/utils"
 	"fmt"
 	"os"
 	"strconv"
@@ -10,42 +11,39 @@ import (
 )
 
 func main() {
-	dayFuncs := []func(){
+	dayFuncs := []utils.DayFunc{
 		days.Day1,
 		days.Day2,
 		days.Day3,
 		days.Day4,
 	}
+	var selectedDays []int
 	if len(os.Args) == 1 {
-		fmt.Println("No arguments provided. Running all days...")
-		for i, f := range dayFuncs {
-			start := time.Now()
-			f()
-			elapsed := time.Since(start).Seconds() * 1000
-			fmt.Printf("Day %d [%.2f ms]\n", i+1, elapsed)
-		}
-		return
+		selectedDays = rangeArrayFrom1(len(dayFuncs))
+	} else {
+		selectedDays = parseDayArgs(os.Args[1], len(dayFuncs))
 	}
-	if len(os.Args) != 2 {
-		fmt.Println("Usage: go run main.go <day_number>[,<day_number>...]")
-		os.Exit(1)
-	}
-	daysList := parseDayArgs(os.Args[1], len(dayFuncs))
-	for _, day := range daysList {
+	for _, day := range selectedDays {
 		start := time.Now()
-		dayFuncs[day-1]()
+		answers := dayFuncs[day-1]()
 		elapsed := time.Since(start).Seconds() * 1000
-		fmt.Printf("Day %d [%.2f ms]\n", day, elapsed)
+		fmt.Printf("Day %d [%.2f ms]: ", day, elapsed)
+		fmt.Printf("Part 1: %s; Part 2: %s\n", answers.Part1, answers.Part2)
 	}
+}
+
+func rangeArrayFrom1(n int) []int {
+	nums := make([]int, n)
+	for i := range nums {
+		nums[i] = i + 1
+	}
+	return nums
 }
 
 func parseDayArgs(arg string, maxDay int) []int {
 	daysList := []int{}
 	for _, part := range strings.Split(arg, ",") {
 		trimmed := strings.TrimSpace(part)
-		if trimmed == "" {
-			continue
-		}
 		day, err := strconv.Atoi(trimmed)
 		if err != nil {
 			panic(fmt.Sprintf("Invalid integer: %s", trimmed))

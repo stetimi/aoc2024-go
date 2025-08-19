@@ -6,7 +6,7 @@ import (
 	"strings"
 )
 
-func Day2() {
+func Day2() utils.Answers {
 	contents := utils.ReadFileToLines("resources/day2.txt")
 	reports := make([][]int, len(contents))
 	for i, report_text := range contents {
@@ -28,8 +28,7 @@ func Day2() {
 			}
 		}
 	}
-	println("Part 1: ", safe_reports_day1)
-	println("Part 2: ", safe_reports_day2)
+	return utils.IntAnswers(safe_reports_day1, safe_reports_day2)
 }
 
 func splitToInts(report string) []int {

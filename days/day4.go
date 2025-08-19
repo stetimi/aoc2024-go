@@ -4,7 +4,7 @@ import (
 	u "aoc2024-go/utils"
 )
 
-func Day4() {
+func Day4() u.Answers {
 	contents := u.ReadFileToLines("resources/day4.txt")
 	gridPoints := u.PointsInGrid(len(contents[0]), len(contents))
 	count := 0
@@ -12,8 +12,7 @@ func Day4() {
 		pos := gridPoints[p]
 		count += countMatches(contents, pos, "XMAS")
 	}
-	println("Part 4: ", count)
-
+	return u.IntAnswers(count, -1)
 }
 
 func countMatches(lines []string, pos u.Point, word string) int {

@@ -8,10 +8,12 @@ import (
 
 const MUL_REGEXP = `mul\(([0-9]+),([0-9]+)\)`
 
-func Day3() {
+func Day3() utils.Answers {
 	program := utils.MustReadFile("resources/day3.txt")
-	println("Part 1: ", runDay1Program(program))
-	println("Part 2: ", runDay2Program(program))
+	return utils.IntAnswers(
+		runDay1Program(program),
+		runDay2Program(program),
+	)
 }
 
 func runDay1Program(memory []byte) int {
