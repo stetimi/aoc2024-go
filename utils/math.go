@@ -21,13 +21,27 @@ type Point struct {
 	Y int
 }
 
+func ScalePoint(p Point, scale int) Point {
+	return Point{
+		X: p.X * scale,
+		Y: p.Y * scale,
+	}
+}
+
+func ScaledLine(p Point, len int) []Point {
+	points := make([]Point, len)
+	for i := range len {
+		points[i] = ScalePoint(p, i)
+	}
+	return points
+}
+
 func AllCompassPoints() []Point {
 	return []Point{
 		{X: 1, Y: 1},
 		{X: 1, Y: 0},
 		{X: 1, Y: -1},
 		{X: 0, Y: 1},
-		{X: 0, Y: 0},
 		{X: 0, Y: -1},
 		{X: -1, Y: 1},
 		{X: -1, Y: 0},

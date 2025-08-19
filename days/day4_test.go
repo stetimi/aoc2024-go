@@ -19,15 +19,22 @@ var lines = []string{
 	"MAMMMXMMMM",
 	"MXMXAXMASX",
 }
+var pointsInGrid = u.PointsInGrid(len(lines[0]), len(lines))
 
-func TestNoMatchAtEdge(t *testing.T) {
+func CountMatchesAtEdgeWhenNone(t *testing.T) {
 	pos := u.Point{X: 0, Y: 0}
-	assert.Equal(t, 0, countMatches(lines, pos, "XMAS"))
+	assert.Equal(t, 0, countMatches(lines, pos, u.AllCompassPoints(), []string{"XMAS"}))
 }
 
-func TestMatchAtEdge(t *testing.T) {
+func CountMatchesAtEdge(t *testing.T) {
 	pos := u.Point{X: 0, Y: 4}
-	assert.False(t, hasMatchAlongDirection(lines, pos, u.Point{X: -1, Y: 0}, "XMAS"))
-	assert.True(t, hasMatchAlongDirection(lines, pos, u.Point{X: 1, Y: 0}, "XMAS"))
-	assert.Equal(t, 1, countMatches(lines, pos, "XMAS"))
+	assert.Equal(t, 1, countMatches(lines, pos, u.AllCompassPoints(), []string{"XMAS"}))
+}
+
+func TestPart1(t *testing.T) {
+	assert.Equal(t, 18, part1(pointsInGrid, lines))
+}
+
+func TestPart2(t *testing.T) {
+	assert.Equal(t, 9, part2(pointsInGrid, lines))
 }
