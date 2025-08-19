@@ -2,13 +2,13 @@ package days
 
 import (
 	u "aoc2024-go/utils"
+	"iter"
 )
 
 func Day4() u.Answers {
 	contents := u.ReadFileToLines("resources/day4.txt")
-	gridPoints := u.PointsInGrid(len(contents[0]), len(contents))
-	part1 := part1(gridPoints, contents)
-	part2 := part2(gridPoints, contents)
+	part1 := part1(contents)
+	part2 := part2(contents)
 	return u.IntAnswers(part1, part2)
 }
 
@@ -24,12 +24,14 @@ func ScaledCompassPoints(scale int) [][]u.Point {
 	return scaledPoints
 }
 
-func part1(gridPoints []u.Point, contents []string) int {
+func part1(contents []string) int {
+	gridPoints := u.PointsInGrid(len(contents[0]), len(contents))
 	scaledCompassPoints := ScaledCompassPoints(len("XMAS"))
 	return runPart(gridPoints, contents, scaledCompassPoints, []string{"XMAS"})
 }
 
-func part2(gridPoints []u.Point, contents []string) int {
+func part2(contents []string) int {
+	gridPoints := u.PointsInGrid(len(contents[0]), len(contents))
 	xmases := []string{"SSAMM", "MSAMS", "SMASM", "MMASS"}
 	xDirections := []u.Point{
 		{X: -1, Y: -1},
@@ -41,10 +43,9 @@ func part2(gridPoints []u.Point, contents []string) int {
 	return runPart(gridPoints, contents, [][]u.Point{xDirections}, xmases)
 }
 
-func runPart(gridPoints []u.Point, contents []string, lines [][]u.Point, matches []string) int {
+func runPart(gridPoints iter.Seq2[int, u.Point], contents []string, lines [][]u.Point, matches []string) int {
 	count := 0
-	for p := range gridPoints {
-		pos := gridPoints[p]
+	for _, pos := range gridPoints {
 		for _, line := range lines {
 			count += countMatches(contents, pos, line, matches)
 		}

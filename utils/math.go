@@ -1,5 +1,9 @@
 package utils
 
+import (
+	"iter"
+)
+
 func Abs(a int) int {
 	if a < 0 {
 		return -a
@@ -49,12 +53,16 @@ func AllCompassPoints() []Point {
 	}
 }
 
-func PointsInGrid(width, height int) []Point {
-	points := make([]Point, 0, width*height)
-	for y := 0; y < height; y++ {
-		for x := 0; x < width; x++ {
-			points = append(points, Point{X: x, Y: y})
+func PointsInGrid(width, height int) iter.Seq2[int, Point] {
+	return func(yield func(int, Point) bool) {
+		i := 0
+		for y := 0; y < height; y++ {
+			for x := 0; x < width; x++ {
+				if !yield(i, Point{X: x, Y: y}) {
+					return
+				}
+				i++
+			}
 		}
 	}
-	return points
 }

@@ -44,7 +44,12 @@ func TestScaledLine(t *testing.T) {
 }
 
 func TestPointsInGrid(t *testing.T) {
-	points := PointsInGrid(2, 2)
-	expected := []Point{{0, 0}, {1, 0}, {0, 1}, {1, 1}}
-	assert.Equal(t, expected, points)
+	indicesList := make([]int, 4)
+	pointsList := make([]Point, 4)
+	for i, point := range PointsInGrid(2, 2) {
+		indicesList[i] = i
+		pointsList[i] = point
+	}
+	assert.Equal(t, []int{0, 1, 2, 3}, indicesList)
+	assert.Equal(t, []Point{{0, 0}, {1, 0}, {0, 1}, {1, 1}}, pointsList)
 }

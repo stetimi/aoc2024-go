@@ -19,7 +19,6 @@ var lines = []string{
 	"MAMMMXMMMM",
 	"MXMXAXMASX",
 }
-var pointsInGrid = u.PointsInGrid(len(lines[0]), len(lines))
 
 func CountMatchesAtEdgeWhenNone(t *testing.T) {
 	pos := u.Point{X: 0, Y: 0}
@@ -32,9 +31,9 @@ func CountMatchesAtEdge(t *testing.T) {
 }
 
 func TestPart1(t *testing.T) {
-	assert.Equal(t, 18, part1(pointsInGrid, lines))
+	assert.Equal(t, 18, part1(lines))
 }
 
 func TestPart2(t *testing.T) {
-	assert.Equal(t, 9, part2(pointsInGrid, lines))
+	assert.Equal(t, 9, part2(lines))
 }
