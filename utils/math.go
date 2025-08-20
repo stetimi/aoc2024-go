@@ -66,3 +66,16 @@ func PointsInGrid(width, height int) iter.Seq2[int, Point] {
 		}
 	}
 }
+
+type Direction4 int
+
+const (
+	North Direction4 = iota
+	East
+	South
+	West
+)
+
+func (d Direction4) TurnRight() Direction4 {
+	return Direction4((d + 1) % 4)
+}

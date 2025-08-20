@@ -24,3 +24,10 @@ func StringAnswers(part1, part2 string) Answers {
 		Part2: part2,
 	}
 }
+
+func TodoAnswers() Answers {
+	return Answers{
+		Part1: "TODO",
+		Part2: "TODO",
+	}
+}
