@@ -6,10 +6,10 @@ import (
 	"strings"
 )
 
-func Day2() utils.Answers {
-	contents := utils.ReadFileToLines("resources/day2.txt")
-	reports := make([][]int, len(contents))
-	for i, report_text := range contents {
+func Day2(contents []byte) utils.Answers {
+	lines := strings.Split(string(contents), "\n")
+	reports := make([][]int, len(lines))
+	for i, report_text := range lines {
 		reports[i] = splitToInts(report_text)
 	}
 

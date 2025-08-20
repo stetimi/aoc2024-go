@@ -3,12 +3,13 @@ package days
 import (
 	u "aoc2024-go/utils"
 	"iter"
+	"strings"
 )
 
-func Day4() u.Answers {
-	contents := u.ReadFileToLines("resources/day4.txt")
-	part1 := part1(contents)
-	part2 := part2(contents)
+func Day4(contents []byte) u.Answers {
+	lines := strings.Split(string(contents), "\n")
+	part1 := part1(lines)
+	part2 := part2(lines)
 	return u.IntAnswers(part1, part2)
 }
 

@@ -3,6 +3,7 @@ package main
 import (
 	"aoc2024-go/days"
 	"aoc2024-go/utils"
+	_ "embed"
 	"fmt"
 	"os"
 	"strconv"
@@ -17,6 +18,7 @@ func main() {
 		days.Day3,
 		days.Day4,
 	}
+	inputs := inputs()
 	var selectedDays []int
 	if len(os.Args) == 1 {
 		selectedDays = rangeArrayFrom1(len(dayFuncs))
@@ -25,7 +27,7 @@ func main() {
 	}
 	for _, day := range selectedDays {
 		start := time.Now()
-		answers := dayFuncs[day-1]()
+		answers := dayFuncs[day-1](inputs[day-1])
 		elapsed := time.Since(start).Seconds() * 1000
 		fmt.Printf("Day %d [%.2f ms]: ", day, elapsed)
 		fmt.Printf("Part 1: %s; Part 2: %s\n", answers.Part1, answers.Part2)
@@ -57,4 +59,25 @@ func parseDayArgs(arg string, maxDay int) []int {
 		panic("No valid day numbers provided.")
 	}
 	return daysList
+}
+
+//go:embed resources/day1.txt
+var day1_file []byte
+
+//go:embed resources/day2.txt
+var day2_file []byte
+
+//go:embed resources/day3.txt
+var day3_file []byte
+
+//go:embed resources/day4.txt
+var day4_file []byte
+
+func inputs() [][]byte {
+	return [][]byte{
+		day1_file,
+		day2_file,
+		day3_file,
+		day4_file,
+	}
 }

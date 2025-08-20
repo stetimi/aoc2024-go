@@ -7,8 +7,8 @@ import (
 	"strings"
 )
 
-func Day1() utils.Answers {
-	lines := utils.ReadFileToLines("resources/day1.txt")
+func Day1(contents []byte) utils.Answers {
+	lines := strings.Split(string(contents), "\n")
 	left, right := splitIntoTwoColumns(lines, "   ")
 	sort.Ints(left)
 	sort.Ints(right)

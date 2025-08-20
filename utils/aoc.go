@@ -9,7 +9,7 @@ type Answers struct {
 	Part2 string
 }
 
-type DayFunc func() Answers
+type DayFunc func([]byte) Answers
 
 func IntAnswers(part1, part2 int) Answers {
 	return Answers{
