@@ -31,9 +31,9 @@ func CountMatchesAtEdge(t *testing.T) {
 }
 
 func TestPart1(t *testing.T) {
-	assert.Equal(t, 18, part1(lines))
+	assert.Equal(t, 18, day4_part1(lines))
 }
 
 func TestPart2(t *testing.T) {
-	assert.Equal(t, 9, part2(lines))
+	assert.Equal(t, 9, day4_part2(lines))
 }

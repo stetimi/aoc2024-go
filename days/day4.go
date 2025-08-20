@@ -8,8 +8,8 @@ import (
 
 func Day4(contents []byte) u.Answers {
 	lines := strings.Split(string(contents), "\n")
-	part1 := part1(lines)
-	part2 := part2(lines)
+	part1 := day4_part1(lines)
+	part2 := day4_part2(lines)
 	return u.IntAnswers(part1, part2)
 }
 
@@ -25,13 +25,13 @@ func ScaledCompassPoints(scale int) [][]u.Point {
 	return scaledPoints
 }
 
-func part1(contents []string) int {
+func day4_part1(contents []string) int {
 	gridPoints := u.PointsInGrid(len(contents[0]), len(contents))
 	scaledCompassPoints := ScaledCompassPoints(len("XMAS"))
 	return runPart(gridPoints, contents, scaledCompassPoints, []string{"XMAS"})
 }
 
-func part2(contents []string) int {
+func day4_part2(contents []string) int {
 	gridPoints := u.PointsInGrid(len(contents[0]), len(contents))
 	xmases := []string{"SSAMM", "MSAMS", "SMASM", "MMASS"}
 	xDirections := []u.Point{
