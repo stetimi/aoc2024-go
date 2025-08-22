@@ -25,6 +25,24 @@ type Point struct {
 	Y int
 }
 
+func (p Point) IsInside(width, height int) bool {
+	return p.X >= 0 && p.X < width && p.Y >= 0 && p.Y < height
+}
+
+func (p Point) AddScaled(other Point, scale int) Point {
+	return Point{
+		X: p.X + scale*other.X,
+		Y: p.Y + scale*other.Y,
+	}
+}
+
+func (p Point) Difference(other Point) Point {
+	return Point{
+		X: p.X - other.X,
+		Y: p.Y - other.Y,
+	}
+}
+
 func (p Point) Back(direction Direction4) Point {
 	switch direction {
 	case North:

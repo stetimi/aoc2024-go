@@ -20,6 +20,7 @@ func main() {
 		days.Day5,
 		days.Day6,
 		days.Day7,
+		days.Day8,
 	}
 	inputs := inputs()
 	var selectedDays []int
@@ -88,6 +89,9 @@ var day6_file []byte
 //go:embed resources/day7.txt
 var day7_file []byte
 
+//go:embed resources/day8.txt
+var day8_file []byte
+
 func inputs() [][]byte {
 	return [][]byte{
 		day1_file,
@@ -97,5 +101,6 @@ func inputs() [][]byte {
 		day5_file,
 		day6_file,
 		day7_file,
+		day8_file,
 	}
 }
