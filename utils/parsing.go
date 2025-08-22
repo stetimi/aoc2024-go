@@ -13,8 +13,8 @@ func MustParseInt(s string) int {
 	return n
 }
 
-func MustParseCommaSeparatedInts(s string) []int {
-	parts := strings.Split(s, ",")
+func MustParseSeparatedInts(s string, separator string) []int {
+	parts := strings.Split(s, separator)
 	ints := make([]int, len(parts))
 	for i, part := range parts {
 		ints[i] = MustParseInt(part)

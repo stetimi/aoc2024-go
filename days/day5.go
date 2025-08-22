@@ -67,7 +67,7 @@ func parseOrderRulesAndUpdates(contents []byte) day5Input {
 			rule := orderingRule{before: u.MustParseInt(splitByPipe[0]), after: u.MustParseInt(splitByPipe[1])}
 			rules = append(rules, rule)
 		} else {
-			update := u.MustParseCommaSeparatedInts(line)
+			update := u.MustParseSeparatedInts(line, ",")
 			updates = append(updates, update)
 		}
 	}

@@ -25,6 +25,13 @@ func StringAnswers(part1, part2 string) Answers {
 	}
 }
 
+func Part1OnlyIntAnswers(part1 int) Answers {
+	return Answers{
+		Part1: strconv.Itoa(part1),
+		Part2: "TODO",
+	}
+}
+
 func TodoAnswers() Answers {
 	return Answers{
 		Part1: "TODO",
