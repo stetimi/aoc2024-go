@@ -25,6 +25,20 @@ type Point struct {
 	Y int
 }
 
+func (p Point) Back(direction Direction4) Point {
+	switch direction {
+	case North:
+		return Point{X: p.X, Y: p.Y + 1}
+	case East:
+		return Point{X: p.X - 1, Y: p.Y}
+	case South:
+		return Point{X: p.X, Y: p.Y - 1}
+	case West:
+		return Point{X: p.X + 1, Y: p.Y}
+	}
+	return p
+}
+
 func ScalePoint(p Point, scale int) Point {
 	return Point{
 		X: p.X * scale,
