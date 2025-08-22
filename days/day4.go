@@ -19,7 +19,7 @@ func ScaledCompassPoints(scale int) [][]u.Point {
 	for i, point := range points {
 		scaledPoints[i] = make([]u.Point, scale)
 		for j := range scale {
-			scaledPoints[i][j] = u.ScalePoint(point, j)
+			scaledPoints[i][j] = point.Scale(j)
 		}
 	}
 	return scaledPoints

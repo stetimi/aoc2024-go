@@ -39,17 +39,17 @@ func (p Point) Back(direction Direction4) Point {
 	return p
 }
 
-func ScalePoint(p Point, scale int) Point {
+func (p Point) Scale(scale int) Point {
 	return Point{
 		X: p.X * scale,
 		Y: p.Y * scale,
 	}
 }
 
-func ScaledLine(p Point, len int) []Point {
+func (p Point) ScaledLine(len int) []Point {
 	points := make([]Point, len)
 	for i := range len {
-		points[i] = ScalePoint(p, i)
+		points[i] = p.Scale(i)
 	}
 	return points
 }

@@ -32,13 +32,13 @@ func TestSignZero(t *testing.T) {
 
 func TestScalePoint(t *testing.T) {
 	p := Point{X: 2, Y: 3}
-	scaled := ScalePoint(p, 4)
+	scaled := p.Scale(4)
 	assert.Equal(t, Point{X: 8, Y: 12}, scaled)
 }
 
 func TestScaledLine(t *testing.T) {
 	p := Point{X: 1, Y: 2}
-	line := ScaledLine(p, 3)
+	line := p.ScaledLine(3)
 	expected := []Point{{0, 0}, {1, 2}, {2, 4}}
 	assert.Equal(t, expected, line)
 }
