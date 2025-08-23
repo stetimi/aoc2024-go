@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/go-softwarelab/common/pkg/must"
 	set "github.com/ugurcsen/gods-generic/sets/hashset"
 )
 
@@ -27,7 +28,7 @@ var addOp intOp = func(a, b int) int { return a + b }
 var mulOp intOp = func(a, b int) int { return a * b }
 var concatOp intOp = func(a, b int) int {
 	concat_str := fmt.Sprintf("%d%d", a, b)
-	return u.MustParseInt(concat_str)
+	return must.ConvertToIntFromString(concat_str)
 }
 
 func Day7(contents []byte) u.Answers {
@@ -96,7 +97,7 @@ func readEquations(contents []byte) []equation {
 
 func readEquation(line string) equation {
 	parts := strings.Split(line, ": ")
-	target := u.MustParseInt(parts[0])
+	target := must.ConvertToIntFromString(parts[0])
 	numbers := u.MustParseSeparatedInts(parts[1], " ")
 	return equation{target: target, numbers: numbers}
 }

@@ -2,6 +2,8 @@ package days
 
 import (
 	u "aoc2024-go/utils"
+
+	"github.com/go-softwarelab/common/pkg/must"
 )
 
 const space = -1
@@ -30,7 +32,7 @@ func toDisk(diskMap string, onSpace func(index, length int)) *Disk {
 	arrayIndex := 0
 
 	for i, ch := range diskMap {
-		length := u.MustParseInt(string(ch))
+		length := must.ConvertToIntFromString(string(ch))
 		if i%2 == 0 {
 			id := i / 2
 			for range length {

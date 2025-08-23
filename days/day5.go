@@ -6,6 +6,7 @@ import (
 	"strings"
 
 	"github.com/dominikbraun/graph"
+	"github.com/go-softwarelab/common/pkg/must"
 )
 
 type orderingRule struct {
@@ -64,7 +65,7 @@ func parseOrderRulesAndUpdates(contents []byte) day5Input {
 		}
 		if strings.Contains(line, "|") {
 			splitByPipe := strings.Split(line, "|")
-			rule := orderingRule{before: u.MustParseInt(splitByPipe[0]), after: u.MustParseInt(splitByPipe[1])}
+			rule := orderingRule{before: must.ConvertToIntFromString(splitByPipe[0]), after: must.ConvertToIntFromString(splitByPipe[1])}
 			rules = append(rules, rule)
 		} else {
 			update := u.MustParseSeparatedInts(line, ",")
